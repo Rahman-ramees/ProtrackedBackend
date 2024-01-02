@@ -11,16 +11,15 @@ require("dotenv").config();
 const bcrypt = require('bcryptjs');
 
 
-
 // Signup
 router.post('/signup', async (req, res) => {
-  let { name, email, password, dateofbirth } = req.body;
+  let { name, email, password } = req.body;
   name = name.trim();
   email = email.trim();
   password = password.trim();
-  dateofbirth = dateofbirth.trim();
+  console.log(name)
 
-  if (name === '' || email === '' || password === '' || dateofbirth === '') {
+  if (name === '' || email === '' || password === '') {
     return res.json({
       status: 'Failed',
       message: 'Empty Input fields!',
@@ -34,11 +33,6 @@ router.post('/signup', async (req, res) => {
     return res.json({
       status: 'Failed',
       message: 'Invalid Email entered ',
-    });
-  } else if (!new Date(dateofbirth).getTime()) {
-    return res.json({
-      status: 'Failed',
-      message: 'Invalid Date of birth entered ',
     });
   } else if (password.length < 8) {
     return res.json({
@@ -73,7 +67,7 @@ router.post('/signup', async (req, res) => {
       const result = await newUser.save();
       return res.json({
         status: 'SUCCESS',
-        message: 'Signup successful',
+        message: 'Signung g guard shared/authp successful',
         data: result,
       });
     } catch (err) {
